@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable no-alert */
 /* eslint-disable operator-linebreak */
 const canvas = document.getElementById('myCanvas');
@@ -60,11 +61,9 @@ document.addEventListener('keyup', keyUpHandler, false);
 document.addEventListener('mousemove', mouseMoveHandler, false);
 
 function collisionDetection() {
-  c = 0;
-  r = 0;
-  const b = bricks[c][r];
-  for (c = 0; c < brickColumnCount; c += 1) {
-    for (r = 0; r < brickRowCount; r += 1) {
+  for (let c = 0; c < brickColumnCount; c += 1) {
+    for (let r = 0; r < brickRowCount; r += 1) {
+      const b = bricks[c][r];
       if (b.status === 1) {
         if (
           x > b.x &&
@@ -76,7 +75,7 @@ function collisionDetection() {
           b.status = 0;
           score += 1;
           if (score === brickRowCount * brickColumnCount) {
-            alert(`YOU WIN, CONGRATULATIONS!\nSCORE: ${score}`);
+            alert('YOU WIN, CONGRATS!');
             document.location.reload();
           }
         }
@@ -84,6 +83,7 @@ function collisionDetection() {
     }
   }
 }
+
 function drawScore() {
   ctx.font = '16px Helvetica';
   ctx.fillStyle = 'whitesmoke';
