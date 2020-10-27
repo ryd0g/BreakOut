@@ -1,4 +1,3 @@
-/* eslint-disable no-shadow */
 /* eslint-disable no-alert */
 /* eslint-disable operator-linebreak */
 const canvas = document.getElementById('myCanvas');
@@ -61,8 +60,8 @@ document.addEventListener('keyup', keyUpHandler, false);
 document.addEventListener('mousemove', mouseMoveHandler, false);
 
 function collisionDetection() {
-  for (let c = 0; c < brickColumnCount; c += 1) {
-    for (let r = 0; r < brickRowCount; r += 1) {
+  for (c = 0; c < brickColumnCount; c += 1) {
+    for (r = 0; r < brickRowCount; r += 1) {
       const b = bricks[c][r];
       if (b.status === 1) {
         if (
