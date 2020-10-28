@@ -1,5 +1,6 @@
 /* eslint-disable no-alert */
 /* eslint-disable operator-linebreak */
+
 // constants
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
@@ -13,6 +14,7 @@ const brickHeight = 20;
 const brickPadding = 10;
 const brickOffsetTop = 30;
 const brickOffsetLeft = 30;
+
 // variables
 let x = canvas.width / 2;
 let y = canvas.height - 30;
@@ -87,6 +89,7 @@ function collisionDetection() {
           if (r % 2 !== 0) score += 1;
           else score += 2;
           if (score === brickRowCount * brickColumnCount) {
+            //  game win alert
             alert('YOU WIN, CONGRATS!');
             document.location.reload();
           }
@@ -139,7 +142,7 @@ function drawBricks() {
         bricks[c][r].y = brickY;
         ctx.beginPath();
         ctx.rect(brickX, brickY, brickWidth, brickHeight);
-        // sets colors of bricks for each row
+        // sets colors of bricks
         if (r % 2 !== 0) {
           if (c % 2 !== 0) {
             ctx.fillStyle = '#00b4d8';
@@ -157,7 +160,9 @@ function drawBricks() {
 
 // function to draw all the elements
 function draw() {
+  // clear canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // draw objects
   drawBricks();
   drawBall();
   drawPaddle();
@@ -165,6 +170,7 @@ function draw() {
   drawLives();
   collisionDetection();
 
+  // bounce the ball off the canvas
   if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
     dx = -dx;
   }
@@ -176,6 +182,7 @@ function draw() {
     } else {
       lives -= 1;
       if (!lives) {
+        // game over alert
         alert(`GAME OVER\nSCORE: ${score}`);
         document.location.reload();
       } else {
