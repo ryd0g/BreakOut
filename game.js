@@ -202,7 +202,7 @@ function draw() {
   }
   checkKeys();
   moveBall();
-  // requestAnimationFrame(draw);
+  requestAnimationFrame(draw);
 }
 initBricks();
 draw();
