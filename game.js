@@ -114,7 +114,7 @@ function drawLives() {
 function drawBall() {
   ctx.beginPath();
   ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-  ctx.fillStyle = '#2A9D8F';
+  ctx.fillStyle = '#8D99AE';
   ctx.fill();
   ctx.closePath();
 }
@@ -123,7 +123,7 @@ function drawBall() {
 function drawPaddle() {
   ctx.beginPath();
   ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-  ctx.fillStyle = '#E9C46A';
+  ctx.fillStyle = '#e0fbfc';
   ctx.fill();
   ctx.closePath();
 }
@@ -139,7 +139,14 @@ function drawBricks() {
         bricks[c][r].y = brickY;
         ctx.beginPath();
         ctx.rect(brickX, brickY, brickWidth, brickHeight);
-        if (r % 2 !== 0) ctx.fillStyle = '#00b4d8';
+        // sets colors of bricks for each row
+        if (r % 2 !== 0) {
+          if (c % 2 !== 0) {
+            ctx.fillStyle = '#00b4d8';
+          } else {
+            ctx.fillStyle = '#72EFDD';
+          }
+        } else if (c % 2 !== 0) ctx.fillStyle = '#5E60CE';
         else ctx.fillStyle = '#0077b6';
         ctx.fill();
         ctx.closePath();
@@ -195,7 +202,7 @@ function draw() {
   }
   checkKeys();
   moveBall();
-  requestAnimationFrame(draw);
+  // requestAnimationFrame(draw);
 }
 initBricks();
 draw();
