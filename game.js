@@ -1,17 +1,11 @@
 /* eslint-disable no-alert */
 /* eslint-disable operator-linebreak */
+// constants
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
 const ballRadius = 10;
-let x = canvas.width / 2;
-let y = canvas.height - 30;
-let dx = 2;
-let dy = -2;
 const paddleHeight = 10;
 const paddleWidth = 75;
-let paddleX = (canvas.width - paddleWidth) / 2;
-let rightPressed = false;
-let leftPressed = false;
 const brickRowCount = 4;
 const brickColumnCount = 6;
 const brickWidth = 60;
@@ -19,9 +13,18 @@ const brickHeight = 20;
 const brickPadding = 10;
 const brickOffsetTop = 30;
 const brickOffsetLeft = 30;
+// variables
+let x = canvas.width / 2;
+let y = canvas.height - 30;
+let dx = 2;
+let dy = -2;
+let paddleX = (canvas.width - paddleWidth) / 2;
+let rightPressed = false;
+let leftPressed = false;
 let score = 0;
 let lives = 3;
 
+// counts brick columsn and rows
 const bricks = [];
 let c = 0;
 let r = 0;
@@ -32,6 +35,7 @@ for (c = 0; c < brickColumnCount; c += 1) {
   }
 }
 
+// function for mouse controls
 function mouseMoveHandler(e) {
   const relativeX = e.clientX - canvas.offsetLeft;
   if (relativeX > 0 && relativeX < canvas.width) {
@@ -39,6 +43,7 @@ function mouseMoveHandler(e) {
   }
 }
 
+// function for pressing down on arrow key controls
 function keyDownHandler(e) {
   if (e.key === 'Right' || e.key === 'ArrowRight') {
     rightPressed = true;
@@ -47,6 +52,7 @@ function keyDownHandler(e) {
   }
 }
 
+// function for up presses on arrow key controls
 function keyUpHandler(e) {
   if (e.key === 'Right' || e.key === 'ArrowRight') {
     rightPressed = false;
@@ -55,10 +61,12 @@ function keyUpHandler(e) {
   }
 }
 
+// event listeners for keyboard and mouse controls
 document.addEventListener('keydown', keyDownHandler, false);
 document.addEventListener('keyup', keyUpHandler, false);
 document.addEventListener('mousemove', mouseMoveHandler, false);
 
+// function for collision with ball and bricks
 function collisionDetection() {
   for (c = 0; c < brickColumnCount; c += 1) {
     for (r = 0; r < brickRowCount; r += 1) {
@@ -83,16 +91,21 @@ function collisionDetection() {
   }
 }
 
+// function for the score
 function drawScore() {
   ctx.font = '16px Helvetica';
   ctx.fillStyle = 'whitesmoke';
   ctx.fillText(`Score: ${score}`, 8, 20);
 }
+
+// function for the lives
 function drawLives() {
   ctx.font = '16px Helvetica';
   ctx.fillStyle = 'whitesmoke';
   ctx.fillText(`Lives: ${lives}`, canvas.width - 65, 20);
 }
+
+// function to draw the ball
 function drawBall() {
   ctx.beginPath();
   ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
@@ -100,6 +113,8 @@ function drawBall() {
   ctx.fill();
   ctx.closePath();
 }
+
+// function to draw the paddle
 function drawPaddle() {
   ctx.beginPath();
   ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
@@ -107,6 +122,8 @@ function drawPaddle() {
   ctx.fill();
   ctx.closePath();
 }
+
+// function to draw the bricks
 function drawBricks() {
   for (c = 0; c < brickColumnCount; c += 1) {
     for (r = 0; r < brickRowCount; r += 1) {
@@ -126,6 +143,7 @@ function drawBricks() {
   }
 }
 
+// function to draw all the elements
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBricks();
