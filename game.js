@@ -83,7 +83,9 @@ function collisionDetection() {
         ) {
           dy = -dy;
           b.status = 0;
-          score += 1;
+          //  counts score on brick collision
+          if (r % 2 !== 0) score += 1;
+          else score += 2;
           if (score === brickRowCount * brickColumnCount) {
             alert('YOU WIN, CONGRATS!');
             document.location.reload();
