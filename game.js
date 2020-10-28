@@ -24,14 +24,17 @@ let leftPressed = false;
 let score = 0;
 let lives = 3;
 
-// counts brick columsn and rows
+// initialize bricks array
 const bricks = [];
 let c = 0;
 let r = 0;
-for (c = 0; c < brickColumnCount; c += 1) {
-  bricks[c] = [];
-  for (r = 0; r < brickRowCount; r += 1) {
-    bricks[c][r] = { x: 0, y: 0, status: 1 };
+// creates bricks
+function initBricks() {
+  for (c = 0; c < brickColumnCount; c += 1) {
+    bricks[c] = [];
+    for (r = 0; r < brickRowCount; r += 1) {
+      bricks[c][r] = { x: 0, y: 0, status: 1 };
+    }
   }
 }
 
@@ -175,15 +178,22 @@ function draw() {
       }
     }
   }
-
-  if (rightPressed && paddleX < canvas.width - paddleWidth) {
-    paddleX += 7;
-  } else if (leftPressed && paddleX > 0) {
-    paddleX -= 7;
+  // checks for arrow keys
+  function checkKeys() {
+    if (rightPressed && paddleX < canvas.width - paddleWidth) {
+      paddleX += 7;
+    } else if (leftPressed && paddleX > 0) {
+      paddleX -= 7;
+    }
   }
-
-  x += dx;
-  y += dy;
+  // function for ball movement
+  function moveBall() {
+    x += dx;
+    y += dy;
+  }
+  checkKeys();
+  moveBall();
   requestAnimationFrame(draw);
 }
+initBricks();
 draw();
