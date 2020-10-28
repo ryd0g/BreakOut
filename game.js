@@ -211,5 +211,6 @@ function draw() {
   moveBall();
   requestAnimationFrame(draw);
 }
+// starts game
 initBricks();
 draw();
